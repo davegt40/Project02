@@ -11,14 +11,63 @@ void quickSort(vector<int>& list, int left, int right);
 int partition(vector<int> &list, int first, int last);
 int median(vector<int> &list, int first, int last);
 
+// Global sort type value
+int sortType = 0;
+
 
 int main()
 {
-	vector<int> list(10);
-	generateData(list);
-	print(list);
-	quickSort(list, 0, 9);
-	print(list);
+
+	int menuChoice;
+
+	while (menuChoice != 0)
+	{
+		cout << "Choose a sorting method:" << endl;
+		cout << "1. Sort array using pivot as middle element of array." << endl;
+		cout << "2. Sort array using pivot as median element of array." << endl;
+		cout << "3. Sort array using pivot as the middle element but insertion for lists less than 20." << endl;
+		cout << "4. Sort array using pivot as median element but insertion for lists less than 20." << endl;
+		cout << "0. Exit Program." << endl << endl;
+		cout << "Enter your selection: ";
+		cin >> menuChoice;
+
+		vector<int> list(10000);
+		generateData(list);
+
+		switch (menuChoice)
+		{
+		case 0:
+			break;
+		case 1:
+			sortType = 1;
+			clock_t x = clock();
+			quickSort(list, 0, 9999);
+			clock_t y = clock();
+			cout << "Total CPU Time for Sort Method 1: " << y - x << endl;
+			break;
+		case 2:
+			sortType = 2;
+			clock_t x = clock();
+			quickSort(list, 0, 9999);
+			clock_t y = clock();
+			cout << "Total CPU Time for Sort Method 2: " << y - x << endl;
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		default:
+			break;
+		}
+
+	}
+
+
+
+	
+	
+	
+	
 
 	system("Pause");
 	return 0;
@@ -64,11 +113,13 @@ void quickSort(vector<int> &list, int first, int end)
 int partition(vector<int> &list, int first, int last)
 {
 	int pivot;
-
 	int index, smallIndex;
 
-	quickSwap(list, first, median(list, first, last)); // sort with median
-	//quickSwap(list, first, (first + last) / 2); // sort with middle
+	if (sortType == 1) //sort with middle
+		quickSwap(list, first, (first + last) / 2);
+	if (sortType == 2) //sort with median
+		quickSwap(list, first, median(list, first, last)); 
+	
 	pivot = list[first];
 	smallIndex = first;
 
