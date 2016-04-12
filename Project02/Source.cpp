@@ -14,43 +14,43 @@ int median(vector<int> &list, int first, int last);
 // Global sort type value
 int sortType = 0;
 
-
 int main()
 {
+	int menuChoice = 0;
 
-	int menuChoice;
-
-	while (menuChoice != 0)
+	while (menuChoice != 9)
 	{
 		cout << "Choose a sorting method:" << endl;
 		cout << "1. Sort array using pivot as middle element of array." << endl;
 		cout << "2. Sort array using pivot as median element of array." << endl;
 		cout << "3. Sort array using pivot as the middle element but insertion for lists less than 20." << endl;
 		cout << "4. Sort array using pivot as median element but insertion for lists less than 20." << endl;
-		cout << "0. Exit Program." << endl << endl;
+		cout << "9. Exit Program." << endl << endl;
 		cout << "Enter your selection: ";
 		cin >> menuChoice;
 
 		vector<int> list(10000);
 		generateData(list);
+		clock_t x;
+		clock_t y;
 
 		switch (menuChoice)
 		{
-		case 0:
+		case 9:
 			break;
 		case 1:
 			sortType = 1;
-			clock_t x = clock();
+			x = clock();
 			quickSort(list, 0, 9999);
-			clock_t y = clock();
-			cout << "Total CPU Time for Sort Method 1: " << y - x << endl;
+			y = clock();
+			cout << "Total CPU Time for Sort Method 1: " << y - x << endl << endl;
 			break;
 		case 2:
 			sortType = 2;
-			clock_t x = clock();
+			x = clock();
 			quickSort(list, 0, 9999);
-			clock_t y = clock();
-			cout << "Total CPU Time for Sort Method 2: " << y - x << endl;
+			y = clock();
+			cout << "Total CPU Time for Sort Method 2: " << y - x << endl << endl;
 			break;
 		case 3:
 			break;
@@ -61,13 +61,6 @@ int main()
 		}
 
 	}
-
-
-
-	
-	
-	
-	
 
 	system("Pause");
 	return 0;
