@@ -10,6 +10,7 @@ void quickSwap(vector<int> &list, int x, int y);
 void quickSort(vector<int>& list, int left, int right);
 int partition(vector<int> &list, int first, int last);
 int median(vector<int> &list, int first, int last);
+void insertion_sort(vector<int>& list, int length);
 
 // Global sort type value
 int sortType = 0;
@@ -53,8 +54,20 @@ int main()
 			cout << "Total CPU Time for Sort Method 2: " << y - x << endl << endl;
 			break;
 		case 3:
+			//print(list);
+			sortType = 3;
+			x = clock();
+			quickSort(list, 0, 9999);
+			y = clock();
+			cout << "Total CPU Time for Sort Method 3: " << y - x << endl << endl;
+			//print(list);
 			break;
 		case 4:
+			sortType = 4;
+			x = clock();
+			quickSort(list, 0, 9999);
+			y = clock();
+			cout << "Total CPU Time for Sort Method 4: " << y - x << endl << endl;
 			break;
 		default:
 			break;
@@ -95,6 +108,12 @@ void quickSwap(vector<int> &list, int x, int y)
 void quickSort(vector<int> &list, int first, int end)
 {
 	int location;
+
+	if ((first < end) && ((end - first) < 20) && (sortType == 3 || sortType == 4))
+	{
+		insertion_sort(list, (end - first));
+	}
+
 	if (first < end)
 	{
 		location = partition(list, first, end);
@@ -108,9 +127,9 @@ int partition(vector<int> &list, int first, int last)
 	int pivot;
 	int index, smallIndex;
 
-	if (sortType == 1) //sort with middle
+	if (sortType == 1 || sortType == 3) //sort with middle
 		quickSwap(list, first, (first + last) / 2);
-	if (sortType == 2) //sort with median
+	if (sortType == 2 || sortType == 4) //sort with median
 		quickSwap(list, first, median(list, first, last)); 
 	
 	pivot = list[first];
@@ -146,4 +165,17 @@ int median(vector<int>& list, int first, int last)
 		return first;
 	else
 		return (first + last) / 2;
+}
+
+void insertion_sort(vector<int>& list, int length) {
+	int i, j, tmp;
+	for (i = 1; i < length; i++) {
+		j = i;
+		while (j > 0 && list[j - 1] > list[j]) {
+			tmp = list[j];
+			list[j] = list[j - 1];
+			list[j - 1] = tmp;
+			j--;
+		}
+	}
 }
