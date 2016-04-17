@@ -32,6 +32,8 @@ int main()
 
 		vector<int> list(10000);
 		generateData(list);
+
+		// Clock variables to determine run time
 		clock_t x;
 		clock_t y;
 
@@ -54,13 +56,11 @@ int main()
 			cout << "Total CPU Time for Sort Method 2: " << y - x << endl << endl;
 			break;
 		case 3:
-			//print(list);
 			sortType = 3;
 			x = clock();
 			quickSort(list, 0, 9999);
 			y = clock();
 			cout << "Total CPU Time for Sort Method 3: " << y - x << endl << endl;
-			//print(list);
 			break;
 		case 4:
 			sortType = 4;
@@ -72,13 +72,12 @@ int main()
 		default:
 			break;
 		}
-
 	}
-
 	system("Pause");
 	return 0;
 }
 
+// Function to fill a vector with randomly generated int values. Receives list as a reference parameter.
 void generateData(vector<int> &list)
 {
 	srand(time(NULL));
@@ -88,6 +87,7 @@ void generateData(vector<int> &list)
 	}
 }
 
+// Function to print out all values of a vector of int variables.
 void print(vector<int> &list)
 {
 	cout << endl;
@@ -98,6 +98,7 @@ void print(vector<int> &list)
 	cout << endl;
 }
 
+// Function that receives a vector of ints and two indexes to swap within the list.
 void quickSwap(vector<int> &list, int x, int y)
 {
 	int temp = list[x];
@@ -105,6 +106,7 @@ void quickSwap(vector<int> &list, int x, int y)
 	list[y] = temp;
 }
 
+// Recursive quicksort function that receives a vector of int variables and starting and ending indexes.
 void quickSort(vector<int> &list, int first, int end)
 {
 	int location;
@@ -122,6 +124,7 @@ void quickSort(vector<int> &list, int first, int end)
 	}
 }
 
+//
 int partition(vector<int> &list, int first, int last)
 {
 	int pivot;
@@ -168,13 +171,13 @@ int median(vector<int>& list, int first, int last)
 }
 
 void insertion_sort(vector<int>& list, int length) {
-	int i, j, tmp;
+	int i, j, temp;
 	for (i = 1; i < length; i++) {
 		j = i;
-		while (j > 0 && list[j - 1] > list[j]) {
-			tmp = list[j];
+		while (j > 0 && (list[j - 1] > list[j])) {
+			temp = list[j];
 			list[j] = list[j - 1];
-			list[j - 1] = tmp;
+			list[j - 1] = temp;
 			j--;
 		}
 	}
